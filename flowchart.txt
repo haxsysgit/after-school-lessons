@@ -1,0 +1,46 @@
+         ┌──────────────────────────┐
+         │        USER/UI           │
+         │  (Vue Front-End App)     │
+         └────────────┬─────────────┘
+                      │
+                      │ Fetches lesson list (GET /lessons)
+                      ▼
+         ┌──────────────────────────┐
+         │     EXPRESS SERVER       │
+         │   (Node.js + Express)    │
+         └────────────┬─────────────┘
+                      │
+                      │ Queries MongoDB Atlas for lessons
+                      ▼
+         ┌──────────────────────────┐
+         │      MONGODB ATLAS       │
+         │  (lessons, orders data)  │
+         └────────────┬─────────────┘
+                      │
+                      │ Returns lessons → Frontend
+                      ▼
+         ┌──────────────────────────┐
+         │  USER VIEWS LESSON LIST  │
+         │ Sort / Add to Cart / etc │
+         └────────────┬─────────────┘
+                      │
+                      │ Adds lessons to Cart (local state)
+                      ▼
+         ┌──────────────────────────┐
+         │     CART / CHECKOUT      │
+         │ Validates Name & Phone   │
+         └────────────┬─────────────┘
+                      │
+                      │ Sends order details (POST /order)
+                      ▼
+         ┌──────────────────────────┐
+         │ EXPRESS updates MongoDB  │
+         │  - Reduces spaces        │
+         │  - Saves order           │
+         └────────────┬─────────────┘
+                      │
+                      ▼
+         ┌──────────────────────────┐
+         │  CONFIRMATION MESSAGE    │
+         │  "Order submitted!"      │
+         └──────────────────────────┘
