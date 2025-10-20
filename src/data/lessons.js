@@ -142,14 +142,5 @@ export default [
     spaces: 5,
     image: "https://cdn-icons-png.flaticon.com/512/1574/1574310.png",
     description: "Study human mind, emotions, and behavior."
-  },
-  {
-    id: 17,
-    subject: "Coding Bootcamp",
-    location: "Online",
-    price: 45,
-    spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/2920/2920224.png",
-    description: "Build projects in JavaScript, HTML, and Vue.js."
   }
 ];
