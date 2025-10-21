@@ -62,11 +62,14 @@
   <div v-if="showSidebar" class="sidebar-backdrop" @click="closeSidebar"></div>
 </template>
 
+
+
 <script>
 import lessons from "./data/lessons";
 import LessonList from "./components/LessonList.vue";
 import Cart from "./components/Cart.vue";
 import CheckoutForm from "./components/CheckoutForm.vue";
+
 
 export default {
   name: "App",
