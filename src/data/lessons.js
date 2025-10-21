@@ -5,7 +5,7 @@ export default [
     location: "London",
     price: 30,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/3135/3135755.png",
+    image: "https://cdn-icons-png.flaticon.com/512/1828/1828911.png", // math symbols (calculator & numbers)
     description: "Master algebra, geometry, and calculus with interactive examples."
   },
   {
@@ -14,8 +14,8 @@ export default [
     location: "Manchester",
     price: 25,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/236/236832.png",
-    description: "Dive into Shakespeare, poetry, and creative writing."
+    image: "https://cdn-icons-png.flaticon.com/512/2972/2972185.png", // book icon
+    description: "Dive into Literature, poetry, and creative writing."
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export default [
     location: "Bristol",
     price: 35,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/2907/2907253.png",
+    image: "https://cdn-icons-png.flaticon.com/512/3144/3144456.png", // atom / physics
     description: "Learn motion, forces, and electricity with experiments."
   },
   {
@@ -32,7 +32,7 @@ export default [
     location: "Online",
     price: 32,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/2947/2947955.png",
+    image: "https://cdn-icons-png.flaticon.com/512/2917/2917420.png", // chemistry flask
     description: "Understand atoms, elements, and reactions through labs."
   },
   {
@@ -41,7 +41,7 @@ export default [
     location: "London",
     price: 28,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+    image: "https://cdn-icons-png.flaticon.com/512/616/616408.png", // DNA strand
     description: "Explore genetics, ecology, and anatomy interactively."
   },
   {
@@ -50,7 +50,7 @@ export default [
     location: "Online",
     price: 40,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/753/753318.png",
+    image: "https://cdn-icons-png.flaticon.com/512/1055/1055687.png", // laptop / code
     description: "Learn Python, algorithms, and software design."
   },
   {
@@ -59,7 +59,7 @@ export default [
     location: "Leeds",
     price: 20,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/706/706195.png",
+    image: "https://cdn-icons-png.flaticon.com/512/2910/2910760.png", // paint palette
     description: "Practice drawing, painting, and creative design."
   },
   {
@@ -68,7 +68,7 @@ export default [
     location: "Birmingham",
     price: 27,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/727/727218.png",
+    image: "https://cdn-icons-png.flaticon.com/512/727/727218.png", // music notes
     description: "Learn instruments, rhythm, and musical theory."
   },
   {
@@ -77,7 +77,7 @@ export default [
     location: "Manchester",
     price: 24,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/197/197560.png",
+    image: "https://cdn-icons-png.flaticon.com/512/197/197560.png", // French flag
     description: "Speak, read, and write in French through fun activities."
   },
   {
@@ -86,7 +86,7 @@ export default [
     location: "London",
     price: 24,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/197/197593.png",
+    image: "https://cdn-icons-png.flaticon.com/512/197/197593.png", // Spanish flag
     description: "Learn conversational Spanish for daily use."
   },
   {
@@ -95,7 +95,7 @@ export default [
     location: "Bristol",
     price: 22,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/4205/4205103.png",
+    image: "https://cdn-icons-png.flaticon.com/512/3144/3144451.png", // theater masks
     description: "Act, improvise, and build confidence on stage."
   },
   {
@@ -104,7 +104,7 @@ export default [
     location: "Birmingham",
     price: 26,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/3410/3410784.png",
+    image: "https://cdn-icons-png.flaticon.com/512/2921/2921822.png", // scroll / historical
     description: "Explore ancient civilizations and modern revolutions."
   },
   {
@@ -113,7 +113,7 @@ export default [
     location: "Leeds",
     price: 23,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/1198/1198321.png",
+    image: "https://cdn-icons-png.flaticon.com/512/2811/2811031.png", // globe
     description: "Study Earth's landscapes, climates, and resources."
   },
   {
@@ -122,7 +122,7 @@ export default [
     location: "Online",
     price: 38,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png",
+    image: "https://cdn-icons-png.flaticon.com/512/1031/1031817.png", // graph / economy
     description: "Understand supply, demand, and global trade."
   },
   {
@@ -131,7 +131,7 @@ export default [
     location: "London",
     price: 29,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/3135/3135810.png",
+    image: "https://cdn-icons-png.flaticon.com/512/3135/3135838.png", // thinking head
     description: "Discuss ideas, logic, and ethics."
   },
   {
@@ -140,7 +140,7 @@ export default [
     location: "Manchester",
     price: 33,
     spaces: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/1574/1574310.png",
+    image: "https://cdn-icons-png.flaticon.com/512/3197/3197621.png", // brain icon
     description: "Study human mind, emotions, and behavior."
   }
 ];
