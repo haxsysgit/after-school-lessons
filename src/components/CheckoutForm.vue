@@ -25,6 +25,9 @@
   </form>
 </template>
 
+
+
+
 <script>
 export default {
   name: "CheckoutForm",
@@ -51,6 +54,7 @@ export default {
       this.phone = "";
       this.payment = "card";
     }
+
   }
 };
 </script>

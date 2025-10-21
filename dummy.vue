@@ -13,6 +13,7 @@
       @checkout="handleCheckout"
     />
 
+    
     <!-- Checkout Success Modal -->
     <div
       class="modal fade show"
