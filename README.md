@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Github Pages Link**: [After School Lessons Frontend]https://haxsysgit.github.io/after-school-lessons/
+**Github Pages Link**: [After School Lessons Frontend](https://haxsysgit.github.io/after-school-lessons/)
 
 This project is a Vue.js frontend application developed as part of the full-stack coursework at Middlesex University. It provides an interactive platform for users to browse, book, and manage after-school lessons.
 
@@ -82,7 +82,6 @@ To set up the project locally:
 
 Please follow the code style and maintain clear commit messages.
 
-## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
@@ -94,4 +93,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For questions or suggestions, open an issue on the [GitHub repository](https://github.com/haxsysgit/after-school-lessons) or contact the maintainer directly.
+For questions or suggestions, open an issue on the [GitHub repository](https://github.com/haxsysgit/after-school-lessons/issues) or contact the maintainer directly.
