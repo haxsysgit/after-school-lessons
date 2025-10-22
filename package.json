@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && git checkout main && rimraf * && cp -r dist/* . && git add . && git commit -m \"Deploy build to GitHub Pages\" && git push origin main --force && git checkout dev"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
+    "rimraf": "^6.0.1",
     "vite": "npm:rolldown-vite@7.1.14"
   },
   "overrides": {
