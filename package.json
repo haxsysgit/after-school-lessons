@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && git checkout main && rimraf * && cp -r dist/* . && git add . && git commit -m \"Deploy build to GitHub Pages\" && git push origin main --force && git checkout dev"
+    "deploy": "npm run build && mkdir -p .deploy && cp -r dist/* .deploy && git checkout main && rimraf * && cp -r ../coursework1-frontend/.deploy/* . && rimraf ../coursework1-frontend/.deploy && git add . && git commit -m \"Deploy build to GitHub Pages\" && git push origin main --force && git checkout dev"
+
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
