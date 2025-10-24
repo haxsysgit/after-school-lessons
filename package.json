@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && mkdir -p .deploy && cp -r dist/* .deploy && git checkout main && git rm -r --cached . && git clean -fd && cp -r .deploy/* . && rm -rf .deploy && git add . && git commit -m 'Deploy build to GitHub Pages' && git push origin main --force && git checkout dev"
+    "deploy": "npm run build && mkdir -p .deploy && cp -r dist/* .deploy && git checkout main && git rm -r --cached . && rm -rf * && cp -r .deploy/* . && rm -rf .deploy && git add . && git commit -m 'Deploy build' && git push origin main --force && git checkout dev"
   },
 
   "dependencies": {
