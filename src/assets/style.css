@@ -458,6 +458,17 @@ html, body {
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
+/* Disabled state for cart button */
+.cart-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.cart-button[disabled]::before {
+  display: none;
+}
+
 /* Touch-friendly interactions */
 @media (hover: none) and (pointer: coarse) {
   .btn:hover {

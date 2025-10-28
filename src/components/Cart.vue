@@ -51,19 +51,22 @@
 </template>
 
 <script>
+// Renders the list of items in the cart and emits remove events back to the parent
 export default {
   name: "Cart",
   props: {
+    // Items currently in the cart (array of { id, subject, price, location })
     cartItems: { type: Array, required: true }
   },
   computed: {
+    // Computes the current total; display-only in this component
     totalPrice() {
       return this.cartItems.reduce((sum, item) => sum + item.price, 0);
     }
   },
   methods: {
+    // Triggers a brief shake animation then emits removal to parent
     handleRemove(index) {
-      // Add visual feedback
       const cartItem = document.querySelectorAll('.cart-item')[index];
       if (cartItem) {
         cartItem.classList.add('shake');

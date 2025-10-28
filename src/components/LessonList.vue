@@ -109,18 +109,23 @@
 </template>
 
 <script>
+// Presents lessons with search and sort controls and emits add-to-cart events
 export default {
   name: "LessonList",
   props: ["lessons"],
   data() {
     return {
+      // UI state for search and sorting
       searchQuery: "",
       sortKey: "",
       sortOrder: "asc",
+
+      // Tracks which lesson button is in a temporary loading state
       addingToCart: null,
     };
   },
   computed: {
+    // Filters by query and sorts by selected key/order without mutating props
     filteredAndSortedLessons() {
       let result = this.lessons.filter((lesson) => {
         const q = this.searchQuery.toLowerCase();
@@ -137,7 +142,7 @@ export default {
           let valA = a[this.sortKey];
           let valB = b[this.sortKey];
 
-          // Handle string comparison
+          // Normalize string values for consistent sort
           if (typeof valA === "string") valA = valA.toLowerCase();
           if (typeof valB === "string") valB = valB.toLowerCase();
 
@@ -151,16 +156,15 @@ export default {
     },
   },
   methods: {
+    // Emits add-to-cart after a short loading feedback and bounce animation
     handleAddToCart(lesson) {
       if (lesson.spaces > 0) {
         this.addingToCart = lesson.id;
         
-        // Simulate loading state
         setTimeout(() => {
           this.$emit('add-to-cart', lesson);
           this.addingToCart = null;
           
-          // Add success feedback
           const button = document.querySelector(`[data-lesson-id="${lesson.id}"] .add-to-cart-btn`);
           if (button) {
             button.classList.add('bounce');

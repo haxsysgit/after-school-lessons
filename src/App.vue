@@ -14,7 +14,12 @@
                 <p class="subtitle">Discover, Learn, and Excel</p>
               </div>
             </div>
-            <button class="cart-button ripple interactive" @click="toggleCart" :class="{ 'cart-pulse': cart.length > 0 }">
+            <button
+              class="cart-button ripple interactive"
+              @click="toggleCart"
+              :class="{ 'cart-pulse': cart.length > 0 }"
+              :disabled="cart.length === 0"
+            >
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-text">Cart</span>
               <span class="badge bg-primary bounce" v-if="cart.length > 0">{{ cart.length }}</span>
@@ -118,38 +123,47 @@ import LessonList from "./components/LessonList.vue";
 import Cart from "./components/Cart.vue";
 import CheckoutForm from "./components/CheckoutForm.vue";
 
-
+// Root app orchestrates data flow between lesson list, cart, and checkout sidebar
 export default {
   name: "App",
   components: { LessonList, Cart, CheckoutForm },
   data() {
     return {
+      // Controls cart sidebar visibility and mode
       showSidebar: false,
-      cart: [],
-      lessons,
       sidebarMode: 'cart', // cart | preview | form | success
+
+      // In-memory lesson data and shopping cart
+      lessons,
+      cart: [],
+
+      // Stores last successful order for confirmation view
       lastOrder: null
     };
   },
   computed: {
+    // Derived total price from cart items
     total() {
       return this.cart.reduce((sum, x) => sum + x.price, 0);
     }
   },
   methods: {
+    // Toggle cart sidebar visibility
     toggleCart() {
       this.showSidebar = !this.showSidebar;
     },
+    // Close sidebar and reset mode after success
     closeSidebar() {
       this.showSidebar = false;
-      if(this.sidebarMode==='success') this.sidebarMode='cart';
+      if (this.sidebarMode === 'success') this.sidebarMode = 'cart';
     },
+    // Add one item to cart and decrement spaces on the lesson
     addToCart(lesson) {
       if (lesson.spaces > 0) {
         lesson.spaces--;
         this.cart.push({ id: lesson.id, subject: lesson.subject, price: lesson.price, location: lesson.location });
-        
-        // Add visual feedback
+
+        // Visual feedback on cart button
         this.$nextTick(() => {
           const cartButton = document.querySelector('.cart-button');
           if (cartButton) {
@@ -159,15 +173,17 @@ export default {
         });
       }
     },
+    // Remove item from cart and restore a space to the original lesson
     removeFromCart(index) {
-      const removed = this.cart.splice(index,1)[0];
-      const original = this.lessons.find(l => l.id===removed.id);
-      if(original) original.spaces++;
+      const removed = this.cart.splice(index, 1)[0];
+      const original = this.lessons.find(l => l.id === removed.id);
+      if (original) original.spaces++;
     },
+    // Handle successful checkout: store order, clear cart, show success state
     handleCheckout(order) {
       this.lastOrder = order;
       this.cart = [];
-      this.sidebarMode='success';
+      this.sidebarMode = 'success';
     }
   }
 };

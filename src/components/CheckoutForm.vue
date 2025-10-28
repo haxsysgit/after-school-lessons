@@ -116,13 +116,16 @@
 
 
 <script>
+// Validates checkout inputs and emits a checkout event with order payload
 export default {
   name: "CheckoutForm",
   props: {
+    // Read-only cart items used to include in the emitted order
     cartItems: { type: Array, required: true }
   },
   data() {
     return {
+      // Controlled form fields and validation flags
       name: "",
       phone: "",
       payment: "card",
@@ -132,11 +135,13 @@ export default {
     };
   },
   computed: {
+    // Button enabled only when both fields are valid and non-empty
     isFormValid() {
       return this.name && this.phone && !this.nameError && !this.phoneError;
     }
   },
   methods: {
+    // Letters and spaces only
     validateName() {
       const nameRegex = /^[a-zA-Z\s]+$/;
       if (!this.name) {
@@ -147,6 +152,7 @@ export default {
         this.nameError = "";
       }
     },
+    // Digits only
     validatePhone() {
       const phoneRegex = /^[0-9]+$/;
       if (!this.phone) {
@@ -157,6 +163,7 @@ export default {
         this.phoneError = "";
       }
     },
+    // Simulates submission, builds order payload, and emits checkout
     async submit() {
       if (!this.isFormValid) return;
       
@@ -173,6 +180,7 @@ export default {
       };
       
       this.$emit("checkout", order);
+      // Reset form after successful submit
       this.name = "";
       this.phone = "";
       this.payment = "card";
