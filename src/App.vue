@@ -94,7 +94,7 @@
           <div class="order-details fade-in">
             <p><strong>Name:</strong> {{ lastOrder.name }}</p>
             <p><strong>Items:</strong> {{ lastOrder.items.length }}</p>
-            <p><strong>Total:</strong> £{{ total.toFixed(2) }}</p>
+            <p><strong>Total:</strong> £{{ displayTotal.toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -140,6 +140,7 @@ export default {
 
       // Stores last successful order for confirmation view
       lastOrder: null,
+      lastTotal: 0,
       baseUrl: BASE_URL
     };
   },
@@ -150,6 +151,9 @@ export default {
     // Derived total price from cart items
     total() {
       return this.cart.reduce((sum, x) => sum + x.price, 0);
+    },
+    displayTotal() {
+      return this.lastOrder ? this.lastTotal : this.total;
     }
   },
   methods: {
@@ -202,6 +206,7 @@ export default {
     },
     // Handle successful checkout: store order, clear cart, show success state
     handleCheckout(order) {
+      this.lastTotal = this.total;
       this.lastOrder = order;
       this.cart = [];
       this.sidebarMode = 'success';
