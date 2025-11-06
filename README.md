@@ -4,6 +4,8 @@
 
 **Github Pages Link**: [After School Lessons Frontend](https://haxsysgit.github.io/vue-coursework-frontend/)
 
+**Backend API Base URL**: https://express-coursework-backend.onrender.com
+
 This project is a Vue.js frontend application developed as part of the full-stack coursework at Middlesex University. It provides an interactive platform for users to browse, book, and manage after-school lessons.
 
 ## Features

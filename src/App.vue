@@ -32,7 +32,7 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="container">
-        <LessonList :lessons="lessons" @add-to-cart="addToCart" />
+        <LessonList :lessons="lessons" :baseUrl="baseUrl" @add-to-cart="addToCart" />
       </div>
     </div>
 
@@ -118,10 +118,11 @@
 
 
 <script>
-import lessons from "./data/lessons";
 import LessonList from "./components/LessonList.vue";
 import Cart from "./components/Cart.vue";
 import CheckoutForm from "./components/CheckoutForm.vue";
+
+const BASE_URL = 'https://express-coursework-backend.onrender.com';
 
 // Root app orchestrates data flow between lesson list, cart, and checkout sidebar
 export default {
@@ -134,12 +135,16 @@ export default {
       sidebarMode: 'cart', // cart | preview | form | success
 
       // In-memory lesson data and shopping cart
-      lessons,
+      lessons: [],
       cart: [],
 
       // Stores last successful order for confirmation view
-      lastOrder: null
+      lastOrder: null,
+      baseUrl: BASE_URL
     };
+  },
+  mounted() {
+    this.loadLessons();
   },
   computed: {
     // Derived total price from cart items
@@ -148,6 +153,22 @@ export default {
     }
   },
   methods: {
+    async loadLessons() {
+      try {
+        const res = await fetch(`${BASE_URL}/lessons`);
+        const data = await res.json();
+        this.lessons = (Array.isArray(data) ? data : []).map(l => ({
+          id: l._id,
+          subject: l.topic,
+          location: l.location,
+          price: Number(l.price),
+          spaces: Number(l.space),
+          image: l.image && l.image.startsWith('/imgs') ? `${BASE_URL}${l.image}` : l.image
+        }));
+      } catch (e) {
+        // ignore fetch failures; UI can still function with empty list
+      }
+    },
     // Toggle cart sidebar visibility
     toggleCart() {
       this.showSidebar = !this.showSidebar;

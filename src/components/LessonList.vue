@@ -112,7 +112,7 @@
 // Presents lessons with search and sort controls and emits add-to-cart events
 export default {
   name: "LessonList",
-  props: ["lessons"],
+  props: ["lessons", "baseUrl"],
   data() {
     return {
       // UI state for search and sorting
@@ -122,20 +122,26 @@ export default {
 
       // Tracks which lesson button is in a temporary loading state
       addingToCart: null,
+      // Remote search results (null means fallback to local filtering)
+      remoteResults: null,
+      debounceId: null,
     };
   },
   computed: {
     // Filters by query and sorts by selected key/order without mutating props
     filteredAndSortedLessons() {
-      let result = this.lessons.filter((lesson) => {
+      const source = this.remoteResults !== null ? this.remoteResults : this.lessons;
+      let result = source;
+      // As a fallback (e.g., if remote fetch fails), apply local filter only when no remote results
+      if (this.remoteResults === null && this.searchQuery) {
         const q = this.searchQuery.toLowerCase();
-        return (
+        result = source.filter((lesson) => (
           lesson.subject.toLowerCase().includes(q) ||
           lesson.location.toLowerCase().includes(q) ||
           String(lesson.price).includes(q) ||
           String(lesson.spaces).includes(q)
-        );
-      });
+        ));
+      }
 
       if (this.sortKey) {
         result.sort((a, b) => {
@@ -155,7 +161,39 @@ export default {
       return result;
     },
   },
+  watch: {
+    searchQuery(val) {
+      if (!val) {
+        this.remoteResults = null;
+        if (this.debounceId) clearTimeout(this.debounceId);
+        return;
+      }
+      this.scheduleSearch();
+    }
+  },
   methods: {
+    scheduleSearch() {
+      if (this.debounceId) clearTimeout(this.debounceId);
+      this.debounceId = setTimeout(() => this.remoteSearch(), 300);
+    },
+    async remoteSearch() {
+      try {
+        const url = `${this.baseUrl}/search?term=${encodeURIComponent(this.searchQuery)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        this.remoteResults = (Array.isArray(data) ? data : []).map(l => ({
+          id: l._id,
+          subject: l.topic,
+          location: l.location,
+          price: Number(l.price),
+          spaces: Number(l.space),
+          image: l.image && l.image.startsWith('/imgs') ? `${this.baseUrl}${l.image}` : l.image
+        }));
+      } catch (e) {
+        // On failure, fall back to local filtering
+        this.remoteResults = null;
+      }
+    },
     // Emits add-to-cart after a short loading feedback and bounce animation
     handleAddToCart(lesson) {
       if (lesson.spaces > 0) {
