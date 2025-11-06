@@ -48,7 +48,13 @@
     </div>
 
     <!-- Lessons Grid -->
-    <div class="lessons-grid">
+    <div v-if="loading" class="loading-state">
+      <div class="loading-spinner" role="status" aria-live="polite" aria-label="Loading lessons"></div>
+      <p class="loading-text">Warming up the classroom...</p>
+      <p class="loading-subtext">Hang tight while we fetch the latest lessons.</p>
+    </div>
+
+    <div v-else class="lessons-grid">
       <div
         v-for="lesson in filteredAndSortedLessons"
         :key="lesson.id"
@@ -98,7 +104,7 @@
     </div>
 
     <!-- Empty State -->
-    <div v-if="filteredAndSortedLessons.length === 0" class="empty-state">
+    <div v-if="!loading && filteredAndSortedLessons.length === 0" class="empty-state">
       <div class="empty-icon">
         <i class="fas fa-search"></i>
       </div>
@@ -112,7 +118,20 @@
 // Presents lessons with search and sort controls and emits add-to-cart events
 export default {
   name: "LessonList",
-  props: ["lessons", "baseUrl"],
+  props: {
+    lessons: {
+      type: Array,
+      default: () => [],
+    },
+    baseUrl: {
+      type: String,
+      default: "",
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       // UI state for search and sorting
@@ -522,6 +541,43 @@ export default {
   background: var(--card-bg);
   border-radius: 16px;
   border: 1px solid var(--border-color);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.loading-spinner {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.5rem;
+  border: 6px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.loading-subtext {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .empty-icon {

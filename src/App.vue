@@ -32,7 +32,7 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="container">
-        <LessonList :lessons="lessons" :baseUrl="baseUrl" @add-to-cart="addToCart" />
+        <LessonList :lessons="lessons" :baseUrl="baseUrl" :loading="isLoading" @add-to-cart="addToCart" />
       </div>
     </div>
 
@@ -136,6 +136,7 @@ export default {
 
       // In-memory lesson data and shopping cart
       lessons: [],
+      isLoading: true,
       cart: [],
 
       // Stores last successful order for confirmation view
@@ -158,6 +159,7 @@ export default {
   },
   methods: {
     async loadLessons() {
+      this.isLoading = true;
       try {
         const res = await fetch(`${BASE_URL}/lessons`);
         const data = await res.json();
@@ -171,6 +173,8 @@ export default {
         }));
       } catch (e) {
         // ignore fetch failures; UI can still function with empty list
+      } finally {
+        this.isLoading = false;
       }
     },
     // Toggle cart sidebar visibility
