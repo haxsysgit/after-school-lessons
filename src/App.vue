@@ -208,12 +208,61 @@ export default {
       const original = this.lessons.find(l => l.id === removed.id);
       if (original) original.spaces++;
     },
-    // Handle successful checkout: store order, clear cart, show success state
-    handleCheckout(order) {
-      this.lastTotal = this.total;
-      this.lastOrder = order;
-      this.cart = [];
-      this.sidebarMode = 'success';
+    // Handle successful checkout: send order to backend, clear cart, show success state
+    async handleCheckout(order) {
+      try {
+        // Prepare order data for backend - format items with lessonId and space
+        const itemsForBackend = order.items.map(item => ({
+          lessonId: item.id,
+          space: 1  // Each cart item represents 1 space booked
+        }));
+
+        // Send order to backend API
+        const response = await fetch(`${BASE_URL}/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: order.name,
+            phone: order.phone,
+            items: itemsForBackend
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to place order');
+        }
+
+        const result = await response.json();
+        console.log('Order created successfully:', result);
+
+        // Update lesson spaces in the backend for each item
+        for (const item of order.items) {
+          // Find the lesson to get its current space count
+          const lesson = this.lessons.find(l => l.id === item.id);
+          if (lesson) {
+            await fetch(`${BASE_URL}/lessons/${item.id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ space: lesson.spaces })  // Persist the decremented value
+            });
+          }
+        }
+
+        // Store order info and show success
+        this.lastTotal = this.total;
+        this.lastOrder = order;
+        this.cart = [];
+        this.sidebarMode = 'success';
+
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Failed to place order: ' + error.message);
+      }
     }
   }
 };
